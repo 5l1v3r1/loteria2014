@@ -11,4 +11,5 @@ do
         mplayer gol.mp3
      fi
    done
+   sleep 60
 done

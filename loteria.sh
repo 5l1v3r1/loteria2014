@@ -1,15 +1,18 @@
 #!/bin/bash
 
-numero=( "12345" "67890" )
+numeros=( "11111" "00000" )
 
 while :
 do
    for i in "${numeros[@]}"
    do
-     PREMIO=`curl -s "http://api.elpais.com/ws/LoteriaNavidadPremiados?n=$i" | awk -F ":" {'print $3'} | awk -F "," {'print $1'}`
-     if [ $PREMIO -ne 0 ]; then
-        mplayer gol.mp3
+     PREMIO=$(curl -s "http://api.elpais.com/ws/LoteriaNavidadPremiados?n=$i")	   
+     CANTIDAD=$(echo $PREMIO | awk -F ":" {'print $3'} | awk -F "," {'print $1'})
+     if [ $CANTIDAD -ne 0 ]; then
+	echo "$PREMIO" | tee premios.txt
+        mplayer gol.mp3 > /dev/null 2>&1
      fi
    done
    sleep 60
 done
+

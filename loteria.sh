@@ -6,7 +6,7 @@ while :
 do
    for i in "${numeros[@]}"
    do
-     PREMIO=$(curl -s "http://api.elpais.com/ws/LoteriaNavidadPremiados?n=$i")	   
+     PREMIO=$(curl -s "https://api.elpais.com/ws/LoteriaNavidadPremiados?n=$i")	   
      CANTIDAD=$(echo $PREMIO | awk -F ":" {'print $3'} | awk -F "," {'print $1'})
      if [ $CANTIDAD -ne 0 ]; then
 	echo "$PREMIO" | tee premios.txt
